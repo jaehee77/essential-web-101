@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스와 콜백함수</title>
+</head>
+<body>
+
+
+    <script>
+        class Counter {
+            constructor(runEveryFiveTiems) {
+                this.counter = 0;
+                this.callback = runEveryFiveTiems;
+            }
+
+            increase() {
+                this.counter++;
+                console.log(this.counter);
+                if(this.counter % 5 === 0) {
+                    this.callback && this.callback(this.counter);
+                }
+            }
+        }
+
+        function printSomething(num) {
+            console.log(`Yo..! ${num}`)
+        }
+
+        function alertNum(num) {
+            alert(`alert,,, ${num}`);
+        }
+
+        const coolCounter = new Counter(printSomething);
+        coolCounter.increase();
+        coolCounter.increase();
+        coolCounter.increase();
+        coolCounter.increase();
+        coolCounter.increase();
+
+
+        const alertCounter = new Counter(alertNum);
+        alertCounter.increase();
+        alertCounter.increase();
+        alertCounter.increase();
+        alertCounter.increase();
+        alertCounter.increase();
+
+    </script>
+
+    
+</body>
+</html>
