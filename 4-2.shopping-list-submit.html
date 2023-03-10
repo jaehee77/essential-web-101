@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쇼핑 목록 앱</title>
+    <link rel="stylesheet" href="./css/shopping.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+
+    <section class="list">
+        <header class="header">
+            Shopping List
+        </header>
+
+        <ul class="items">
+            <!-- <li class="item__row">
+                <div class="item">
+                    <span class="item__name">Egg</span>
+                    <button class="item__delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+                <div class="item__divider"></div>
+            </li> -->
+        </ul>
+
+        <footer class="footer">
+            <form class="new-form">
+                <input type="text" class="footer__input">
+                <button class="footer__button">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </form>
+            
+        </footer>
+    </section>
+
+    <script>
+        // 1. 인풋 입력 + enter or 버튼 클릭
+        // 2. 아이템 추가
+        // 3. 삭제, 아이템 삭제
+
+        const items = document.querySelector('.items');
+        const input = document.querySelector('.footer__input');
+        const addBtn = document.querySelector('.footer__button');
+        const newForm = document.querySelector('.new-form');
+
+        function onAdd(evt) {
+            // 1. 사용자가 입력한 텍스트를 받아옴
+            // 2. 새로운 아이템을 만듦(텍스트 + 삭제아이콘버튼)
+            // 3. items 컨테이너 안에 새로 만든 아이템을 추가
+            // 4. 새로 추가된 아이템으로 스크롤링
+            // 5. 인풋을 초기화한다.
+            const text = input.value;
+            
+            if(text.trim() === '') {
+                alert('입력해라잉 !!')
+                input.value = '';
+                input.focus();
+                return;
+            };
+
+            const item = createItem(text);
+            items.appendChild(item);
+            item.scrollIntoView({block: 'end'});
+
+            input.value = '';
+            input.focus();
+
+
+        }
+
+
+        let id = 0;
+        function createItem(text) {
+            const itemRow = document.createElement('li');
+            itemRow.setAttribute('class', 'item__row');
+            itemRow.setAttribute('data-id', id);
+
+            itemRow.innerHTML = `
+                <div class="item">
+                    <span class="item__name">${text}</span>
+                    <button class="item__delete" data-id="${id}">
+                        <i class="fas fa-trash-alt" data-id="${id}"></i>
+                    </button>
+                </div>
+                <div class="item__divider"></div>
+            `;
+
+            id++;
+
+            return itemRow;
+        }
+
+        newForm.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            onAdd();
+        })
+
+       
+        items.addEventListener('click', (evt)=> {
+            const selectedId = evt.target.dataset.id;
+            // console.log(evt.target) // 디버깅으로 타켓 확인
+            if(selectedId) {
+                 const toBeDeleted = document.querySelector(`.item__row[data-id="${selectedId}"]`);
+                 console.log(selectedId, toBeDeleted)
+                 toBeDeleted.remove();
+            }
+        })
+
+
+    </script>
+
+    
+</body>
+</html>

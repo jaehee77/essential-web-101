@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈도우 사이즈</title>
+    <style>
+        .window-size {
+            position: absolute;
+            display: inline-block;
+            padding: 20px;
+            inset: 0;
+            width: 400px;
+            height: 120px;
+            background-color: thistle;   
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <ul style="height: 1500px">
+        <li>window.screen : 모니터 사이즈<ul>
+        <li>window.screen.width</li>
+        <li>window.screen.inner </li>
+        </ul>
+        </li>
+        <li>window.outer : 브라우저의 탭,주소창, 툴바등을을 포함한 사이즈 <br>
+            메뉴바, 툴바, 스크롤바의 크기를 포함한 window의 넓이와 높이
+            (즉,  브라우저 자체의 크기)<ul>
+        <li>window.outerWidth</li>
+        <li>window.outerHeight</li>
+        </ul>
+        </li>
+        <li>window.inner : 탭바, 메뉴바, 툴바, 스크롤바의 크기를 제외한 window의 넓이와 높이<ul>
+        <li>window.innerWidth</li>
+        <li>window.innerHeight</li>
+        </ul>
+        </li>
+        <li>documentElement.clientWidth : 문서 자체이지만 스크롤되는 영역은 제외<ul>
+        <li>document.documentElement.clientWidth</li>
+        <li>document.documentElement.clientHeight</li>
+        </ul>
+        </li>
+        </ul>
+        
+   
+    <div class="window-size">
+        <ul>
+            <li>window.screen : <span class="screen"></span></li>
+            <li>window.outer : <span class="outer"></span></li>
+            <li>window.inner : <span class="inner"></span></li>
+            <li>documentElement.clientWidth : <span class="clientWidth"></span></li>
+        </ul>
+    </div>
+
+
+    <script>
+
+        let screen = document.querySelector('.screen');
+        let outer = document.querySelector('.outer');
+        let inner = document.querySelector('.inner');
+        let clientWidth = document.querySelector('.clientWidth');
+
+        function updataSize() {
+            screen.innerHTML = `${window.screen.width}, ${window.screen.height}`;
+            outer.innerHTML = `${window.outerWidth}, ${window.outerHeight}`;
+            inner.innerHTML = `${window.innerWidth}, ${window.innerHeight}`;
+            clientWidth.innerHTML = `${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}`;
+        }
+        
+
+        window.addEventListener('resize', () => {
+            updataSize();
+        })
+        updataSize();
+        
+    </script>
+    
+</body>
+</html>

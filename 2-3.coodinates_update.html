@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>좌표</title>
+
+    <style>
+        body {
+            background: #000;
+            margin: 0;
+        }
+        .line {
+            position: absolute;
+            background-color: white;
+            
+        }
+        .horizontal {
+            width: 100%;
+            height: 1px;
+        }
+        .vertical {
+            height: 100%;
+            width: 1px;
+        }
+        .target {
+            position: absolute;
+            margin: auto;
+            transform: translate(-50%, -50%);
+        }
+        .tag {
+            color: white;
+            position: absolute;
+            transform: translate(20px, 20px);
+            font-size: 38px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="line horizontal"></div>
+    <div class="line vertical"></div>
+    <img class="target" src="./images/target.png" alt="">
+    <span class="tag">coodinate</span>
+
+
+    <script>
+
+        const vertical = document.querySelector('.vertical');
+        const horizontal = document.querySelector('.horizontal');
+        const target = document.querySelector('.target');
+        const tag = document.querySelector('.tag');
+
+        const targetRect = target.getBoundingClientRect();
+        const targetHalfWidth = targetRect.width / 2;
+        const targetHalfHeight = targetRect.height / 2;
+
+        document.addEventListener('mousemove', evt => {
+            const x = evt.clientX;
+            const y = evt.clientY;
+            // console.log(`${x} ${y}`);
+
+            vertical.style.transform = `translateX(${x}px)`;
+            horizontal.style.transform = `translateY(${y}px)`;
+
+            target.style.transform = `translate(${x - targetHalfWidth}px, ${y - targetHalfHeight}px)`;
+            tag.style.transform = `translate(${x}px, ${y}px)`;
+
+            tag.innerHTML = `${x}, ${y}`;
+            
+        })
+        
+        
+
+    </script>
+    
+</body>
+</html>

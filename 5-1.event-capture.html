@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .outer {
+        width: 500px;
+        height: 500px;
+        background-color: yellow;
+      }
+
+      .middle {
+        width: 50%;
+        height: 50%;
+        margin: auto;
+        background-color: thistle;
+        transform: translateY(50%);
+      }
+
+      button {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="middle">
+        <button>Click Me</button>
+      </div>
+    </div>
+    <script>
+      const outer = document.querySelector('.outer');
+      const middle = document.querySelector('.middle');
+      const button = document.querySelector('button');
+
+      // target : 사용자가 클릭한 요소
+      // currentTarget : 지금 클릭이 된 이벤트 처리를 하고 있는, 즉 이벤트 리스너가 등록되어 있는 요소
+
+      outer.addEventListener('click', event => {
+        console.log(event.target,  event.currentTarget);
+        if (event.target !== event.currentTarget) {
+          return;
+        }
+        // console.log(`outer: ${event.currentTarget}, ${event.target}`);
+      });
+
+      middle.addEventListener('click', event => {
+        console.log(event.target,  event.currentTarget);
+        if (event.target !== event.currentTarget) {
+          return;
+        }
+        // console.log(`middle ${event.currentTarget}, ${event.target}`);
+      });
+
+
+      button.addEventListener('click', event => {
+        // console.log(`button1 ${event.currentTarget}, ${event.target}`);
+
+        // 이벤트 전파를 막는 것은 좋지 못한 방법 (다른 곳에서 다른 이벤트를 사용해야할 때 막혀있으면 확장성일 떨어짐)
+        // event.stopPropagation()
+
+        // 이후에 발생하는 이벤트에 대해서 전파를 막음
+        // event.stopImmediatePropagation()
+      });
+
+      button.addEventListener('click', event => {
+        // console.log(`button2 ${event.currentTarget}, ${event.target}`);
+
+        // 여기서 이벤트를 막으면 이 해당 이벤트 이후의 이벤트가 없다면 의미가 없음
+        // event.stopImmediatePropagation()
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        .box {list-style: none;}
+        .box .box-item {
+            width: 400px;
+            height: 150px;
+            background-color: blanchedalmond;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: dodgerblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box .box-item.special {
+            background-color: lightsalmon;
+        }
+        aside {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>마우스 이벤트(클릭, 호버, 무브등)의 좌표값</h1>
+    <h2 id="element-getboundingclientrect-">Element.getBoundingClientRect()</h2>
+<ul>
+<li>윈도우창(뷰포트)을 기준으로 한 상세한 위치값</li>
+<li>뷰포트 좌,상단인 (0, 0) 좌표를 기준으로 위치값이 결정</li>
+<li>left, top, right, bottom</li>
+</ul>
+<h2 id="client-x-y-vs-page-x-y">Client x, y Vs Page x, y</h2>
+<ul>
+<li>client x, y<ul>
+<li>뷰포트 기준으로 맨 좌측에서 x, 맨 상단에서  y</li>
+</ul>
+</li>
+<li>page x, y<ul>
+<li>도큐먼트를 기준으로 x, y 값이 결정</li>
+</ul>
+</li>
+</ul>
+
+    <ul class="box">
+        <li class="box-item"></li>
+        <li class="box-item"></li>
+        <li class="box-item"></li>
+        <li class="box-item"></li>
+        <li class="box-item"></li>
+        <li class="box-item special"></li>
+        <li class="box-item"></li>
+        <li class="box-item"></li>
+        <li class="box-item"></li>
+        <li class="box-item"></li>
+    </ul>
+
+    <aside>
+        <button class="scroll-by">scroll by 100px(y축)</button>
+        <button class="scroll-to">scroll to 100px(y축)</button>
+        <button class="scroll-into">scroll into special</button>
+    </aside>
+
+
+<script>
+    const boxItems = document.querySelectorAll('.box-item');
+   
+    boxItems.forEach((item, idx) => {
+        item.addEventListener('click', (evt) => {
+            const rect = item.getBoundingClientRect();
+            console.log(rect);
+            item.innerHTML = `
+                clientX : ${evt.clientX}, clientY:${evt.clientY}
+                pageX : ${evt.pageX}, pageY: ${evt.pageY}`;
+        })
+    });
+
+    const scrollBy = document.querySelector('.scroll-by');
+    const scrollTo = document.querySelector('.scroll-to');
+    const scrollInto = document.querySelector('.scroll-into');
+    const special = document.querySelector('.special');
+
+    scrollBy.addEventListener('click', () => {
+        // window.scrollBy(0, 100);
+        window.scrollBy({
+            top: 100,
+            left: 0,
+            behavior: 'smooth'
+        })
+    })
+    scrollTo.addEventListener('click', () => {
+        window.scrollTo(0, 500)
+    })
+
+    scrollInto.addEventListener('click', () => {
+        console.log(111);
+        special.scrollIntoView();
+    })
+
+    
+</script>
+
+    
+</body>
+</html>

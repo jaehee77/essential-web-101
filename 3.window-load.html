@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+
+    <script>
+        // only document (html 만)
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DomContentLoaded');
+            //
+        })
+
+
+        // after resources (html, css, images...)
+        window.addEventListener('load', () => {
+            console.log('loaded');
+        })
+
+        // before unload (사용자가 브라우저에서 나가기 직전에 호출. 즉, 페이지가 끝날 때)
+        // 새로고침하면 콘솔창에서 값 확인 가능
+        window.addEventListener('beforeunload', () => {
+            console.log('beforeunload')
+        })
+
+        // resource is being unloaded
+        window.addEventListener('unload', () => {
+            console.log('unload')
+        })
+
+
+    </script>
+
+    <script src="./js/test.js" defer></script>
+    <!-- defer : html 을 모두 분석한 후에 불러옴 -->
+</body>
+</html>
