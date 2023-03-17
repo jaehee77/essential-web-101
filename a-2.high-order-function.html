@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        const fruits = ['🍌', '🥝', '🍇', '🍓']; 
+        
+        // 퀴즈1: 주어진 배열 안의 딸기 아이템을 키위로 교체하는 고차함수 사용하기
+        // 단, 주어진 배열을 수정하지 않도록!
+        // input: ['🍌', '🍓', '🍇', '🍓']
+        // output: [ '🍌', '🥝', '🍇', '🥝' ]
+
+        function replace(array, from, to) {
+            return array.map(item => item === from ? to : from);
+        }
+
+        console.log(
+            replace(fruits, '🍓', '🥝')
+        );
+
+
+        // 퀴즈2:
+        // 배열과 특정한 요소를 전달받아,
+        // 배열안에 그 요소가 몇개나 있는지 고차함수 사용하기
+        // input: [ '🍌', '🥝', '🍇', '🥝' ], '🥝'
+        // output: 2
+
+        function reduceCount(array, item) {
+             return array.reduce((count, value) => {
+                if(value === item) {
+                    count++
+                }
+                return count;
+            }, 0)
+        }
+
+        const arr1 = [ '🍌', '🥝', '🍇', '🥝' ];
+
+        console.log(
+            reduceCount(arr1, '🥝')
+        );
+
+        function filterCount(array, item) {
+            return array.filter(value => value == item).length;
+        }
+        console.log(
+            filterCount(arr1, '🥝')
+        )
+
+
+        // 퀴즈3: 배열1, 배열2 두개의 배열을 전달받아,
+        // 배열1 아이템중 배열2에 존재하는 아이템만 담고 있는 배열 반환
+        // 고차함수 사용하기
+        // input: ['🍌', '🥝', '🍇'], ['🍌', '🍓', '🍇', '🍓']
+        // output: [ '🍌', '🍇' ]
+
+        function match(input, search) {
+            return input.filter(item => search.includes(item))
+        }
+
+        console.log(
+            match(['🍌', '🥝', '🍇'], ['🍌', '🍓', '🍇', '🍓'])
+        )
+
+        
+        // 퀴즈 4
+        // 5이상(보다 큰)의 숫자들의 평균
+        const nums = [3, 16, 5, 25, 4, 34, 21];
+
+
+        const result2 = nums
+            .filter(num => num > 5)
+            .reduce((avg, val, _, arr) => avg + val / arr.length, 0);
+            
+        console.log(result2);
+
+
+        // 퀴즈 5
+        // 주어진 배열에서 중복을 제거하라.
+        const duplication = ['🍌', '🥝', '🍇','🍓', '🥝', '🍅', '🍒', '🍓'];
+        const [...dup] = new Set(duplication);
+        console.log(
+            dup
+        );
+
+        console.log(
+            [...new Set(duplication)]
+        );
+
+        
+        
+    </script>
+</body>
+</html>
