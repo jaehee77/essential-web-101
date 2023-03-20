@@ -108,3 +108,12 @@ button {
 .pop-up--hide {
     display: none;
 }
+
+.carrot,
+.bug {
+    transition: transform .1s ease-in;
+}
+.carrot:hover,
+.bug:hover {
+    transform: scale(1.05);
+}
